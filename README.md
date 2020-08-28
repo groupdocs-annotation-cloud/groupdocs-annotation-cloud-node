@@ -67,4 +67,4 @@ infoApi.getSupportedFileFormats()
 ## Licensing
 GroupDocs.Annotation Cloud Node.js SDK licensed under [MIT License](LICENSE).
 
-[Home](https://www.groupdocs.cloud/) | [Product Page](https://products.groupdocs.cloud/annotation/nodejs) | [Docs](https://wiki.groupdocs.cloud/annotationcloud/) | [API Reference](https://apireference.groupdocs.cloud/annotation/) | [Examples](https://github.com/groupdocs-annotation-cloud/groupdocs-annotation-cloud-node) | [Blog](https://blog.groupdocs.cloud/category/annotation/) | [Free Support](https://forum.groupdocs.cloud/c/annotation) | [Free Trial](https://purchase.groupdocs.cloud/trial)
+[Home](https://www.groupdocs.cloud/) | [Docs](https://docs.groupdocs.cloud/annotation/) | [API Reference](https://apireference.groupdocs.cloud/annotation/) | [Examples](https://github.com/groupdocs-annotation-cloud/groupdocs-annotation-cloud-node) | [Blog](https://blog.groupdocs.cloud/category/annotation/) | [Free Support](https://forum.groupdocs.cloud/c/annotation) | [Free Trial](https://purchase.groupdocs.cloud/trial)
