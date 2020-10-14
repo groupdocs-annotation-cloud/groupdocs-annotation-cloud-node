@@ -1,7 +1,7 @@
 /*
 * The MIT License (MIT)
 *
-* Copyright (c) 2003-2019 Aspose Pty Ltd
+* Copyright (c) 2003-2020 Aspose Pty Ltd
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -136,16 +136,19 @@ export class TestFile {
 
     public static GetTestFilesAnnotate() {
         return [
+            TestFile.OnePageCells,
+            TestFile.TenPagesCells,
             TestFile.OnePageDiagram,
             TestFile.TenPagesDiagram,
             TestFile.OnePageEmail,
+            TestFile.OnePageHtml,
             TestFile.OnePageBmp,
             TestFile.OnePagePng,
-            TestFile.OnePagePdf,
-            TestFile.OnePagePasswordPdf,
-            TestFile.OnePageSlides,
-            TestFile.OnePagePasswordSlides,
-            TestFile.TenPagesSlides,
+            //TestFile.OnePagePdf,
+            //TestFile.OnePagePasswordPdf,
+            //TestFile.OnePageSlides,
+            //TestFile.OnePagePasswordSlides,
+            //TestFile.TenPagesSlides,
             TestFile.OnePageWords,
             TestFile.OnePagePasswordWords,
             TestFile.TenPagesWords
@@ -173,8 +176,9 @@ export class TestFile {
 
     public static GetTestFilesManyPages() {
         return [
+            TestFile.TenPagesCells,
             TestFile.TenPagesDiagram,
-            TestFile.TenPagesSlides
+            TestFile.TenPagesWords
         ];
     }        
 }

@@ -1,7 +1,7 @@
 /*
 * The MIT License (MIT)
 *
-* Copyright (c) 2003-2019 Aspose Pty Ltd
+* Copyright (c) 2003-2020 Aspose Pty Ltd
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ import "mocha";
 import * as TestContext from "../test_context";
 import { TestFile } from "../test_file";
 import * as Model from "../../src/model";
-import { GetPdfRequest, PostAnnotationsRequest, GetImportRequest, GetExportRequest, DeleteAnnotationsRequest } from "../../src/annotation_api";
+import { PostAnnotationsRequest, GetImportRequest, GetExportRequest, DeleteAnnotationsRequest } from "../../src/annotation_api";
 
 describe("annotate_api", () => {
     
@@ -38,17 +38,7 @@ describe("annotate_api", () => {
 
     afterEach(async function() {
         await TestContext.cleanupTempFiles();
-    });
-
-    it("test_get_pdf", async () => {            
-        const annotateApi = TestContext.getAnnotateApi();
-        const testFiles = TestFile.GetTestFilesNoPassword();
-        for(let i=0; i<testFiles.length; i++) {
-            let file = testFiles[i];
-            const response = await annotateApi.getPdf(new GetPdfRequest(file.GetPath()));
-            expect(response.length).greaterThan(0);            
-        }
-    });    
+    }); 
 
     it("test_annotate", async () => {            
         const annotateApi = TestContext.getAnnotateApi();
@@ -84,7 +74,7 @@ describe("annotate_api", () => {
         a.box.height = 37.7290153503418;
         a.pageNumber = 0
         a.penColor = 1201033
-        a.penStyle = 0
+        a.penStyle = Model.AnnotationInfo.PenStyleEnum.Solid;
         a.penWidth = 1
         a.type = Model.AnnotationInfo.TypeEnum.Area;
         a.creatorName = "Anonym A."        

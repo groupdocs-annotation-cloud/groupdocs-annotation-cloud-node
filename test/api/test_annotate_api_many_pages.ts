@@ -1,7 +1,7 @@
 /*
 * The MIT License (MIT)
 *
-* Copyright (c) 2003-2019 Aspose Pty Ltd
+* Copyright (c) 2003-2020 Aspose Pty Ltd
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ import "mocha";
 import * as TestContext from "../test_context";
 import { TestFile } from "../test_file";
 import * as Model from "../../src/model";
-import { GetPdfRequest, PostAnnotationsRequest, GetImportRequest, GetExportRequest, DeleteAnnotationsRequest } from "../../src/annotation_api";
+import { PostAnnotationsRequest, GetImportRequest, GetExportRequest, DeleteAnnotationsRequest } from "../../src/annotation_api";
 
 describe("annotate_api_many_pages", () => {
     
@@ -38,17 +38,7 @@ describe("annotate_api_many_pages", () => {
 
     afterEach(async function() {
         await TestContext.cleanupTempFiles();
-    });
-
-    it("test_get_pdf", async () => {            
-        const annotateApi = TestContext.getAnnotateApi();
-        const testFiles = TestFile.GetTestFilesManyPages();
-        for(let i=0; i<testFiles.length; i++) {
-            let file = testFiles[i];
-            const response = await annotateApi.getPdf(new GetPdfRequest(file.GetPath()));
-            expect(response.length).greaterThan(0);            
-        }
-    });    
+    });   
 
     it("test_annotate", async () => {            
         const annotateApi = TestContext.getAnnotateApi();
@@ -84,7 +74,7 @@ describe("annotate_api_many_pages", () => {
         a1.box.height = 37.7290153503418;
         a1.pageNumber = 0;
         a1.penColor = 1201033;
-        a1.penStyle = 0;
+        a1.penStyle = Model.AnnotationInfo.PenStyleEnum.Solid;
         a1.penWidth = 1;
         a1.type = Model.AnnotationInfo.TypeEnum.Distance;
         a1.creatorName = "Anonym A."
@@ -100,7 +90,7 @@ describe("annotate_api_many_pages", () => {
         a2.box.height = 37.7290153503418;
         a2.pageNumber = 2;
         a2.penColor = 1201033;
-        a2.penStyle = 0;
+        a2.penStyle = Model.AnnotationInfo.PenStyleEnum.Solid;
         a2.penWidth = 1;
         a2.type = Model.AnnotationInfo.TypeEnum.Area;
         a2.creatorName = "Anonym A."
@@ -129,7 +119,7 @@ describe("annotate_api_many_pages", () => {
         a4.box.height = 37.7290153503418;
         a4.pageNumber = 5
         a4.penColor = 1201033;
-        a4.penStyle = 0;
+        a4.penStyle = Model.AnnotationInfo.PenStyleEnum.Solid;
         a4.penWidth = 1;
         a4.type = Model.AnnotationInfo.TypeEnum.Arrow;
         a4.creatorName = "Anonym A."

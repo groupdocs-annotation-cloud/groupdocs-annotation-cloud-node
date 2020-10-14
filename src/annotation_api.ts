@@ -1,7 +1,7 @@
 /*
 * The MIT License (MIT)
 *
-* Copyright (c) 2003-2019 Aspose Pty Ltd
+* Copyright (c) 2003-2020 Aspose Pty Ltd
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -159,36 +159,6 @@ export class AnnotateApi {
 
         const response = await invokeApiMethod(requestOptions, this.configuration);
         const result =  Serializer.deserialize(response.body, "Array<AnnotationInfo>");
-        return Promise.resolve(result);
-    }
-
-    /**
-     * Retrieves PDF version of document
-     * @param requestObj contains request parameters
-     */
-    public async getPdf(requestObj: model.GetPdfRequest): Promise<Buffer> {
-        if (requestObj === null || requestObj === undefined) {
-            throw new Error('Required parameter "requestObj" was null or undefined when calling getPdf.');
-        }
-
-        let localVarPath = this.configuration.getServerUrl() + "/annotation/pdf";
-        const queryParameters: any = {};
-
-        // verify required parameter 'requestObj.filePath' is not null or undefined
-        if (requestObj.filePath === null || requestObj.filePath === undefined) {
-            throw new Error('Required parameter "requestObj.filePath" was null or undefined when calling getPdf.');
-        }
-        
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "filePath", requestObj.filePath);
-        const requestOptions: request.Options = {
-            method: "GET",
-            qs: queryParameters,
-            uri: localVarPath,
-            encoding: null,
-        };
-
-        const response = await invokeApiMethod(requestOptions, this.configuration);
-        const result =  Serializer.deserialize(response.body, "Buffer");
         return Promise.resolve(result);
     }
 
@@ -437,7 +407,7 @@ export class FileApi {
         }
 
         const requestOptions: request.Options = {
-            method: "POST",
+            method: "PUT",
             qs: queryParameters,
             uri: localVarPath,
             json: true,
@@ -542,7 +512,7 @@ export class FolderApi {
         
         localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "storageName", requestObj.storageName);
         const requestOptions: request.Options = {
-            method: "POST",
+            method: "PUT",
             qs: queryParameters,
             uri: localVarPath,
             json: true,
@@ -822,12 +792,12 @@ export class PreviewApi {
         }
         
         localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "filePath", requestObj.filePath);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "countPagesToConvert", requestObj.countPagesToConvert);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "pageNumber", requestObj.pageNumber);
         localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "pageNumbersToConvert", requestObj.pageNumbersToConvert);
+        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "format", requestObj.format);
+        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "width", requestObj.width);
+        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "height", requestObj.height);
         localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "withoutAnnotations", requestObj.withoutAnnotations);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "enableCaching", requestObj.enableCaching);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "cacheStoragePath", requestObj.cacheStoragePath);
+        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "renderComments", requestObj.renderComments);
         localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "password", requestObj.password);
         const requestOptions: request.Options = {
             method: "GET",

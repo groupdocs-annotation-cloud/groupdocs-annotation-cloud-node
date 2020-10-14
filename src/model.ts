@@ -1,7 +1,7 @@
 /*
 * The MIT License (MIT)
 *
-* Copyright (c) 2003-2019 Aspose Pty Ltd
+* Copyright (c) 2003-2020 Aspose Pty Ltd
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -32,13 +32,8 @@ export class AnnotationInfo {
      */
     public static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            name: "guid",
-            baseName: "guid",
-            type: "string",
-        },        
-        {
-            name: "documentGuid",
-            baseName: "documentGuid",
+            name: "id",
+            baseName: "id",
             type: "number",
         },        
         {
@@ -47,9 +42,24 @@ export class AnnotationInfo {
             type: "string",
         },        
         {
-            name: "creatorGuid",
-            baseName: "creatorGuid",
+            name: "textToReplace",
+            baseName: "textToReplace",
             type: "string",
+        },        
+        {
+            name: "horizontalAlignment",
+            baseName: "horizontalAlignment",
+            type: "AnnotationInfo.HorizontalAlignmentEnum",
+        },        
+        {
+            name: "verticalAlignment",
+            baseName: "verticalAlignment",
+            type: "AnnotationInfo.VerticalAlignmentEnum",
+        },        
+        {
+            name: "creatorId",
+            baseName: "creatorId",
+            type: "number",
         },        
         {
             name: "creatorName",
@@ -65,6 +75,11 @@ export class AnnotationInfo {
             name: "box",
             baseName: "box",
             type: "Rectangle",
+        },        
+        {
+            name: "points",
+            baseName: "points",
+            type: "Array<Point>",
         },        
         {
             name: "pageNumber",
@@ -85,11 +100,6 @@ export class AnnotationInfo {
             name: "type",
             baseName: "type",
             type: "AnnotationInfo.TypeEnum",
-        },        
-        {
-            name: "access",
-            baseName: "access",
-            type: "AnnotationInfo.AccessEnum",
         },        
         {
             name: "replies",
@@ -119,17 +129,12 @@ export class AnnotationInfo {
         {
             name: "penStyle",
             baseName: "penStyle",
-            type: "number",
+            type: "AnnotationInfo.PenStyleEnum",
         },        
         {
             name: "backgroundColor",
             baseName: "backgroundColor",
             type: "number",
-        },        
-        {
-            name: "fieldText",
-            baseName: "fieldText",
-            type: "string",
         },        
         {
             name: "fontFamily",
@@ -150,6 +155,16 @@ export class AnnotationInfo {
             name: "angle",
             baseName: "angle",
             type: "number",
+        },        
+        {
+            name: "url",
+            baseName: "url",
+            type: "string",
+        },        
+        {
+            name: "imagePath",
+            baseName: "imagePath",
+            type: "string",
         }    ];
 
     /**
@@ -162,12 +177,7 @@ export class AnnotationInfo {
     /**
      * Gets or sets the unique identifier
      */
-    public guid: string;
-    
-    /**
-     * Gets or sets the document unique identifier
-     */
-    public documentGuid: number;
+    public id: number;
     
     /**
      * Gets or sets the annotation text
@@ -175,9 +185,24 @@ export class AnnotationInfo {
     public text: string;
     
     /**
+     * GGets or sets text to be replaced
+     */
+    public textToReplace: string;
+    
+    /**
+     * Gets or sets text horizontal alignment
+     */
+    public horizontalAlignment: AnnotationInfo.HorizontalAlignmentEnum;
+    
+    /**
+     * Gets or sets text vertical alignment
+     */
+    public verticalAlignment: AnnotationInfo.VerticalAlignmentEnum;
+    
+    /**
      * Gets or sets the creator unique identifier
      */
-    public creatorGuid: string;
+    public creatorId: number;
     
     /**
      * Gets or sets the name of the creator
@@ -193,6 +218,11 @@ export class AnnotationInfo {
      * Gets or sets the box where annotation will be placed
      */
     public box: Rectangle;
+    
+    /**
+     * Gets or sets collection of points that describe rectangles with text
+     */
+    public points: Array<Point>;
     
     /**
      * Gets or sets the number of page where annotation will be placed
@@ -213,11 +243,6 @@ export class AnnotationInfo {
      * Gets or sets the annotation type
      */
     public type: AnnotationInfo.TypeEnum;
-    
-    /**
-     * Gets or sets the annotation access
-     */
-    public access: AnnotationInfo.AccessEnum;
     
     /**
      * Gets or sets the array of annotation replies
@@ -247,17 +272,12 @@ export class AnnotationInfo {
     /**
      * Gets or sets the annotation's pen style
      */
-    public penStyle: number;
+    public penStyle: AnnotationInfo.PenStyleEnum;
     
     /**
      * Gets or sets the annotation's background color 
      */
     public backgroundColor: number;
-    
-    /**
-     * Gets or sets the annotation's field text
-     */
-    public fieldText: string;
     
     /**
      * Gets or sets the annotation's font family
@@ -279,6 +299,16 @@ export class AnnotationInfo {
      */
     public angle: number;
     
+    /**
+     * Gets or sets annotation link url
+     */
+    public url: string;
+    
+    /**
+     * Gets or sets image file path in cloud storage, for Image annotations
+     */
+    public imagePath: string;
+    
     public constructor(init?: Partial<AnnotationInfo>) {
         
         Object.assign(this, init);
@@ -288,25 +318,44 @@ export class AnnotationInfo {
 // tslint:disable:quotemark
 // tslint:disable-next-line:no-namespace
 export namespace AnnotationInfo {
+    export enum HorizontalAlignmentEnum {
+        None = 'None' as any,
+        Left = 'Left' as any,
+        Center = 'Center' as any,
+        Right = 'Right' as any,
+    }
+    export enum VerticalAlignmentEnum {
+        None = 'None' as any,
+        Top = 'Top' as any,
+        Center = 'Center' as any,
+        Bottom = 'Bottom' as any,
+    }
     export enum TypeEnum {
-        Text = 'Text' as any,
+        None = 'None' as any,
         Area = 'Area' as any,
-        Point = 'Point' as any,
-        TextStrikeout = 'TextStrikeout' as any,
-        Polyline = 'Polyline' as any,
-        TextField = 'TextField' as any,
-        Watermark = 'Watermark' as any,
-        TextReplacement = 'TextReplacement' as any,
         Arrow = 'Arrow' as any,
-        TextRedaction = 'TextRedaction' as any,
-        ResourcesRedaction = 'ResourcesRedaction' as any,
-        TextUnderline = 'TextUnderline' as any,
         Distance = 'Distance' as any,
         Ellipse = 'Ellipse' as any,
+        Link = 'Link' as any,
+        Point = 'Point' as any,
+        Polyline = 'Polyline' as any,
+        ResourcesRedaction = 'ResourcesRedaction' as any,
+        TextField = 'TextField' as any,
+        TextHighlight = 'TextHighlight' as any,
+        TextRedaction = 'TextRedaction' as any,
+        TextReplacement = 'TextReplacement' as any,
+        TextStrikeout = 'TextStrikeout' as any,
+        TextUnderline = 'TextUnderline' as any,
+        Watermark = 'Watermark' as any,
+        Image = 'Image' as any,
     }
-    export enum AccessEnum {
-        Public = 'Public' as any,
-        Private = 'Private' as any,
+    export enum PenStyleEnum {
+        Solid = 'Solid' as any,
+        Dash = 'Dash' as any,
+        DashDot = 'DashDot' as any,
+        Dot = 'Dot' as any,
+        LongDash = 'LongDash' as any,
+        DashDotDot = 'DashDotDot' as any,
     }
 }
 // tslint:enable:quotemark
@@ -320,14 +369,14 @@ export class AnnotationReplyInfo {
      */
     public static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            name: "guid",
-            baseName: "guid",
-            type: "string",
+            name: "id",
+            baseName: "id",
+            type: "number",
         },        
         {
-            name: "userGuid",
-            baseName: "userGuid",
-            type: "string",
+            name: "userId",
+            baseName: "userId",
+            type: "number",
         },        
         {
             name: "userName",
@@ -340,8 +389,8 @@ export class AnnotationReplyInfo {
             type: "string",
         },        
         {
-            name: "message",
-            baseName: "message",
+            name: "comment",
+            baseName: "comment",
             type: "string",
         },        
         {
@@ -350,9 +399,9 @@ export class AnnotationReplyInfo {
             type: "Date",
         },        
         {
-            name: "parentReplyGuid",
-            baseName: "parentReplyGuid",
-            type: "string",
+            name: "parentReplyId",
+            baseName: "parentReplyId",
+            type: "number",
         }    ];
 
     /**
@@ -365,12 +414,12 @@ export class AnnotationReplyInfo {
     /**
      * Gets or sets the unique identifier
      */
-    public guid: string;
+    public id: number;
     
     /**
      * Gets or sets the user's unique identifier
      */
-    public userGuid: string;
+    public userId: number;
     
     /**
      * Gets or sets the user's name
@@ -385,7 +434,7 @@ export class AnnotationReplyInfo {
     /**
      * Gets or sets the message
      */
-    public message: string;
+    public comment: string;
     
     /**
      * Gets or sets the reply time
@@ -395,7 +444,7 @@ export class AnnotationReplyInfo {
     /**
      * Gets or sets the parent reply unique identifier
      */
-    public parentReplyGuid: string;
+    public parentReplyId: number;
     
     public constructor(init?: Partial<AnnotationReplyInfo>) {
         
@@ -1035,16 +1084,6 @@ export class PageInfo {
             name: "height",
             baseName: "height",
             type: "number",
-        },        
-        {
-            name: "isVisible",
-            baseName: "isVisible",
-            type: "boolean",
-        },        
-        {
-            name: "rows",
-            baseName: "rows",
-            type: "Array<RowInfo>",
         }    ];
 
     /**
@@ -1068,16 +1107,6 @@ export class PageInfo {
      * Gets or sets the page height
      */
     public height: number;
-    
-    /**
-     * Indicates whether page is visible or not
-     */
-    public isVisible: boolean;
-    
-    /**
-     * Gets or sets the list of text rows
-     */
-    public rows: Array<RowInfo>;
     
     public constructor(init?: Partial<PageInfo>) {
         
@@ -1186,99 +1215,6 @@ export class Rectangle {
     public height: number;
     
     public constructor(init?: Partial<Rectangle>) {
-        
-        Object.assign(this, init);
-    }        
-}
-
-/**
- * Describes text row information
- */
-export class RowInfo {
-
-    /**
-     * Attribute type map
-     */
-    public static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            name: "characterCoordinates",
-            baseName: "characterCoordinates",
-            type: "Array<number>",
-        },        
-        {
-            name: "lineHeight",
-            baseName: "lineHeight",
-            type: "number",
-        },        
-        {
-            name: "lineLeft",
-            baseName: "lineLeft",
-            type: "number",
-        },        
-        {
-            name: "lineTop",
-            baseName: "lineTop",
-            type: "number",
-        },        
-        {
-            name: "lineWidth",
-            baseName: "lineWidth",
-            type: "number",
-        },        
-        {
-            name: "text",
-            baseName: "text",
-            type: "string",
-        },        
-        {
-            name: "textCoordinates",
-            baseName: "textCoordinates",
-            type: "Array<number>",
-        }    ];
-
-    /**
-     * Returns attribute type map
-     */
-    public static getAttributeTypeMap() {
-        return RowInfo.attributeTypeMap;
-    }
-
-    /**
-     * Gets or sets the list of character coordinates
-     */
-    public characterCoordinates: Array<number>;
-    
-    /**
-     * Gets or sets the text line height
-     */
-    public lineHeight: number;
-    
-    /**
-     * Gets or sets the x coordinate of the text line upper left corner
-     */
-    public lineLeft: number;
-    
-    /**
-     * Gets or sets the y coordinate of the text line upper left corner
-     */
-    public lineTop: number;
-    
-    /**
-     * Gets or sets the text line width
-     */
-    public lineWidth: number;
-    
-    /**
-     * Gets or sets the text
-     */
-    public text: string;
-    
-    /**
-     * Gets or sets the list of text coordinates
-     */
-    public textCoordinates: Array<number>;
-    
-    public constructor(init?: Partial<RowInfo>) {
         
         Object.assign(this, init);
     }        
@@ -1458,7 +1394,7 @@ export class FileVersion extends StorageFile {
 }
 
 /**
- * The document page image representatoin
+ * The document page image representation
  */
 export class PageImage extends LinkElement {
 
@@ -1491,8 +1427,10 @@ export class PageImage extends LinkElement {
 }
 
 const enumsMap = {
+    "AnnotationInfo.HorizontalAlignmentEnum": AnnotationInfo.HorizontalAlignmentEnum,
+    "AnnotationInfo.VerticalAlignmentEnum": AnnotationInfo.VerticalAlignmentEnum,
     "AnnotationInfo.TypeEnum": AnnotationInfo.TypeEnum,
-    "AnnotationInfo.AccessEnum": AnnotationInfo.AccessEnum,
+    "AnnotationInfo.PenStyleEnum": AnnotationInfo.PenStyleEnum,
 };
 
 const typeMap = {
@@ -1514,7 +1452,6 @@ const typeMap = {
             PageInfo,
             Point,
             Rectangle,
-            RowInfo,
             StorageExist,
             StorageFile,
             AnnotationApiLink,
@@ -1588,20 +1525,6 @@ export class GetExportRequest {
 export class GetImportRequest {
     /**
      * Document path in storage
-     */
-    public filePath: string;
-    
-    public constructor(filePath: string) {        
-        this.filePath = filePath;
-    }
-}
-
-/**
- * Request model for GetPdf operation.
- */
-export class GetPdfRequest {
-    /**
-     * Path to document in storage
      */
     public filePath: string;
     
@@ -1958,19 +1881,24 @@ export class GetPagesRequest {
     public filePath: string;
 
     /**
-     * The count pages to convert
-     */
-    public countPagesToConvert: number;
-
-    /**
-     * The start page number
-     */
-    public pageNumber: number;
-
-    /**
      * The list of page numbers to convert
      */
     public pageNumbersToConvert: Array<number>;
+
+    /**
+     * Preview format: \"PNG\" (default), \"JPEG\", or \"BMP\"
+     */
+    public format: string;
+
+    /**
+     * Preview image width
+     */
+    public width: number;
+
+    /**
+     * Preview image height
+     */
+    public height: number;
 
     /**
      * If true returns specific pages without annotations
@@ -1978,28 +1906,23 @@ export class GetPagesRequest {
     public withoutAnnotations: boolean;
 
     /**
-     * Indicates whether to use previously cached document or not
+     * Render comments (false by default)
      */
-    public enableCaching: boolean;
-
-    /**
-     * The cache storage path
-     */
-    public cacheStoragePath: string;
+    public renderComments: boolean;
 
     /**
      * Source document opening password
      */
     public password: string;
     
-    public constructor(filePath: string, countPagesToConvert?: number, pageNumber?: number, pageNumbersToConvert?: Array<number>, withoutAnnotations?: boolean, enableCaching?: boolean, cacheStoragePath?: string, password?: string) {        
+    public constructor(filePath: string, pageNumbersToConvert?: Array<number>, format?: string, width?: number, height?: number, withoutAnnotations?: boolean, renderComments?: boolean, password?: string) {        
         this.filePath = filePath;
-        this.countPagesToConvert = countPagesToConvert;
-        this.pageNumber = pageNumber;
         this.pageNumbersToConvert = pageNumbersToConvert;
+        this.format = format;
+        this.width = width;
+        this.height = height;
         this.withoutAnnotations = withoutAnnotations;
-        this.enableCaching = enableCaching;
-        this.cacheStoragePath = cacheStoragePath;
+        this.renderComments = renderComments;
         this.password = password;
     }
 }

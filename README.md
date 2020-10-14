@@ -1,4 +1,5 @@
 # GroupDocs.Annotation Cloud Node.js SDK
+
 Node.js module for communicating with the GroupDocs.Annotation Cloud API
 
 ## Installation
@@ -7,7 +8,7 @@ A package `groupdocs-annotation-cloud` is available at [npmjs.com](https://www.n
 
 ```shell
 npm install groupdocs-annotation-cloud
-```    
+```
 
 ## Getting Started
 
@@ -63,8 +64,18 @@ infoApi.getSupportedFileFormats()
     });
 ```
 
-
 ## Licensing
+
 GroupDocs.Annotation Cloud Node.js SDK licensed under [MIT License](LICENSE).
 
-[Home](https://www.groupdocs.cloud/) | [Product Page](https://products.groupdocs.cloud/annotation/nodejs) | [Docs](https://docs.groupdocs.cloud/annotation/) | [Demos](https://products.groupdocs.app/annotation/family) | [API Reference](https://apireference.groupdocs.cloud/annotation/) | [Examples](https://github.com/groupdocs-annotation-cloud/groupdocs-annotation-cloud-node-samples) | [Blog](https://blog.groupdocs.cloud/category/annotation/) | [Free Support](https://forum.groupdocs.cloud/c/annotation) | [Free Trial](https://purchase.groupdocs.cloud/trial)
+## Resources
+
++[**Website**](https://www.groupdocs.cloud)
++[**Product Home**](https://products.groupdocs.cloud/annotation)
++[**Documentation**](https://docs.groupdocs.cloud/annotation/)
++[**Free Support Forum**](https://forum.groupdocs.cloud/c/annotation)
++[**Blog**](https://blog.groupdocs.cloud/category/annotation)
+
+## Contact Us
+
+Your feedback is very important to us. Please feel free to contact us using our [Support Forums](https://forum.groupdocs.cloud/c/annotation).

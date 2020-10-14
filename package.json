@@ -1,6 +1,6 @@
 {
   "name": "groupdocs-annotation-cloud",
-  "version": "19.5.0",
+  "version": "20.10.0",
   "description": "GroupDocs.Annotation Cloud SDK for Node.js",
   "homepage": "https://products.groupdocs.cloud/annotation",
   "author": {
@@ -25,8 +25,7 @@
   "scripts": {
     "clean": "rimraf ./lib && rimraf ./node_modules",
     "lint": "npm install --no-save && tslint src/{,**/}*.ts test/{,**/}*.ts -t verbose --project ./tsconfig.json",
-    "test": "npm install --no-save && mocha -r ts-node/register test/**/*.ts --timeout 1200000 --reporter spec",
-    "test1": "npm install --no-save && mocha -r ts-node/register test/**/test_preview_api.ts --timeout 1200000 --reporter spec",
+    "test": "npm install --no-save && mocha -r ts-node/register test/**/*.ts --timeout 180000 --reporter spec",
     "build:dev": "rimraf ./lib && npm install --no-save && tsc --build ./tsconfig-dev.json",
     "build:lib": "rimraf ./lib && npm install --no-save && tsc --build ./tsconfig.json",
     "build:package": "npm pack"
@@ -37,14 +36,13 @@
     "@types/request": "*"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.7",
+    "@types/chai": "^4.2.9",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.0.8",
-    "asposestoragecloud": "^1.0.5",
-    "mocha": "^6.1.4",
+    "mocha": "^7.0.1",
     "chai": "^4.2.0",
-    "ts-node": "^8.2.0",
-    "tslint": "^5.17.0",
-    "typescript": "^3.5.2"
+    "ts-node": "^8.6.2",
+    "tslint": "^5.17.0",    
+    "typescript": "^3.7.5"
   }
 }
