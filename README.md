@@ -32,7 +32,7 @@ Check out the [Developer's Guide](https://docs.groupdocs.cloud/annotation/develo
 **Web:** MHTML\
 **Others:** TXT
 
-## Get Started with GroupDocs.Annotation Cloud SDK for Ruby
+## Get Started with GroupDocs.Annotation Cloud SDK for Node.js
 
 First create an account at [GroupDocs for Cloud](https://dashboard.groupdocs.cloud/) and get your application information. Next, follow the installation steps to get started.
 
