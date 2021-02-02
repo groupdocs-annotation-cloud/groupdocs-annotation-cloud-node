@@ -74,14 +74,15 @@ Or compile and run the same written in TypeScript:
 
 ```ts
 // load the module
-import { InfoApi } from "groupdocs-annotation-cloud";
+import { InfoApi, Configuration } from "groupdocs-annotation-cloud";
 
-// get your appSid and appKey at https://dashboard.groupdocs.cloud (free registration is required).
-const appSid: string = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX";
-const appKey: string = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+// Get Client Id and Client Secret from https://dashboard.groupdocs.cloud
+const myClientId: string = "";
+const myClientSecret: string = "";
 
-// construct AnnotationApi
-const infoApi: InfoApi = InfoApi.fromKeys(appSid, appKey);
+// Create instance of the API
+const configuration: Configuration = Configuration(myClientId, myClientSecret);
+const infoApi: InfoApi = InfoApi.fromConfig(configuration);
 
 // retrieve supported file-formats
 infoApi.getSupportedFileFormats()
