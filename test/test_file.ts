@@ -1,7 +1,7 @@
 /*
 * The MIT License (MIT)
 *
-* Copyright (c) 2003-2020 Aspose Pty Ltd
+* Copyright (c) 2003-2021 Aspose Pty Ltd
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -63,6 +63,22 @@ export class TestFile {
     public static OnePagePasswordWords: TestFile = new TestFile("one-page-password.docx", "words\\", "password");
     /* Test file */
     public static TenPagesWords: TestFile = new TestFile("ten-pages.docx", "words\\");
+    /* Test file */
+    public static InputWords: TestFile = new TestFile("input.docx", "input\\");
+    /* Test file */
+    public static InputCells: TestFile = new TestFile("input.xlsx", "input\\");
+    /* Test file */
+    public static InputEmail: TestFile = new TestFile("input.eml", "input\\");
+    /* Test file */
+    public static InputHtml: TestFile = new TestFile("input.html", "input\\");
+    /* Test file */
+    public static InputPdf: TestFile = new TestFile("input.pdf", "input\\");
+    /* Test file */
+    public static InputImage: TestFile = new TestFile("input.png", "input\\");
+    /* Test file */
+    public static InputPresentation: TestFile = new TestFile("input.pptx", "input\\");
+    /* Test file */
+    public static InputDiagram: TestFile = new TestFile("input.vsdx", "input\\");                                
 
     /**
      * File name
@@ -111,13 +127,22 @@ export class TestFile {
             TestFile.TenPagesSlides,
             TestFile.OnePageWords,
             TestFile.OnePagePasswordWords,
-            TestFile.TenPagesWords
+            TestFile.TenPagesWords,
+            TestFile.InputWords,
+            TestFile.InputCells,
+            TestFile.InputEmail,
+            TestFile.InputHtml,
+            TestFile.InputPdf,
+            TestFile.InputImage,
+            TestFile.InputPresentation,
+            TestFile.InputDiagram
         ];
     }
 
-    public static GetTestFilesPreview() {
+    public static GetTestFilesAnnotate() {
         return [
             TestFile.OnePageCells,
+            TestFile.OnePagePasswordCells,
             TestFile.TenPagesCells,
             TestFile.OnePageDiagram,
             TestFile.TenPagesDiagram,
@@ -129,48 +154,24 @@ export class TestFile {
             TestFile.OnePagePasswordPdf,
             TestFile.TenPagesPdf,
             TestFile.OnePageSlides,
+            TestFile.OnePagePasswordSlides,
             TestFile.TenPagesSlides,
-            TestFile.OnePageWords
-        ];
-    }    
-
-    public static GetTestFilesAnnotate() {
-        return [
-            TestFile.OnePageCells,
-            TestFile.TenPagesCells,
-            TestFile.OnePageDiagram,
-            TestFile.TenPagesDiagram,
-            TestFile.OnePageEmail,
-            TestFile.OnePageHtml,
-            TestFile.OnePageBmp,
-            TestFile.OnePagePng,
-            //TestFile.OnePagePdf,
-            //TestFile.OnePagePasswordPdf,
-            //TestFile.OnePageSlides,
-            //TestFile.OnePagePasswordSlides,
-            //TestFile.TenPagesSlides,
             TestFile.OnePageWords,
             TestFile.OnePagePasswordWords,
             TestFile.TenPagesWords
         ];
     }     
 
-    public static GetTestFilesNoPassword() {
+    public static GetTestFilesWithAnnotations() {
         return [
-            TestFile.OnePageCells,
-            TestFile.TenPagesCells,
-            TestFile.OnePageDiagram,
-            TestFile.TenPagesDiagram,
-            TestFile.OnePageEmail,
-            TestFile.OnePageHtml,
-            TestFile.OnePageBmp,
-            TestFile.OnePagePng,
-            TestFile.OnePagePdf,
-            TestFile.TenPagesPdf,
-            TestFile.OnePageSlides,
-            TestFile.TenPagesSlides,
-            TestFile.OnePageWords,
-            TestFile.TenPagesWords
+            TestFile.InputWords,
+            TestFile.InputCells,
+            TestFile.InputEmail,
+            TestFile.InputHtml,
+            TestFile.InputPdf,
+            TestFile.InputImage,
+            TestFile.InputPresentation,
+            TestFile.InputDiagram
         ];
     }    
 
@@ -178,7 +179,9 @@ export class TestFile {
         return [
             TestFile.TenPagesCells,
             TestFile.TenPagesDiagram,
-            TestFile.TenPagesWords
+            TestFile.TenPagesWords,
+            TestFile.TenPagesPdf,
+            TestFile.TenPagesPdf
         ];
     }        
 }

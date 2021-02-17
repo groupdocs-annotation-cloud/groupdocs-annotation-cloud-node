@@ -1,7 +1,7 @@
 /*
 * The MIT License (MIT)
 *
-* Copyright (c) 2003-2020 Aspose Pty Ltd
+* Copyright (c) 2003-2021 Aspose Pty Ltd
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@ import { expect } from "chai";
 import "mocha";
 import * as TestContext from "../test_context";
 import { TestFile } from "../test_file";
+import * as Model from "../../src/model";
 import { GetPagesRequest, DeletePagesRequest } from "../../src/model";
 
 describe("preview_api", () => {
@@ -39,18 +40,34 @@ describe("preview_api", () => {
         await TestContext.cleanupTempFiles();
     });
     
-
-    it("test_get_delete_pages", async () => {            
+    it("test_create_pages", async () => {            
         const previewApi = TestContext.getPreviewApi();
-        const testFiles = TestFile.GetTestFilesPreview();
+        const testFiles = TestFile.GetTestFilesAnnotate();
         for(let i=0; i<testFiles.length; i++) {
             let file = testFiles[i];
-            //console.log("test_get_delete_pages: " + file.GetPath());
-            const response = await previewApi.getPages(new GetPagesRequest(file.GetPath(), undefined, undefined, undefined, undefined, undefined, undefined, file.password));
+            let fileInfo = new Model.FileInfo();
+            fileInfo.filePath = file.GetPath();
+            fileInfo.password = file.password;
+            let options = new Model.PreviewOptions();
+            options.fileInfo = fileInfo;          
+
+            const response = await previewApi.getPages(new GetPagesRequest(options));
             expect(response.totalCount).greaterThan(0);            
             expect(response.entries.length).greaterThan(0);
-            await previewApi.deletePages(new DeletePagesRequest(file.GetPath()));
         }
     });
+
+    it("test_delete_pages", async () => {            
+        const previewApi = TestContext.getPreviewApi();
+        const testFiles = TestFile.GetTestFilesAnnotate();
+        for(let i=0; i<testFiles.length; i++) {
+            let file = testFiles[i];
+            let fileInfo = new Model.FileInfo();
+            fileInfo.filePath = file.GetPath();
+            fileInfo.password = file.password;        
+
+            await previewApi.deletePages(new DeletePagesRequest(fileInfo));
+        }
+    });    
 
 });

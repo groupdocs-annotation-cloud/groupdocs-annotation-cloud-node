@@ -1,7 +1,7 @@
 /*
 * The MIT License (MIT)
 *
-* Copyright (c) 2003-2020 Aspose Pty Ltd
+* Copyright (c) 2003-2021 Aspose Pty Ltd
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,89 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
+
+/**
+ * Defines options for annotating documents
+ */
+export class AnnotateOptions {
+
+    /**
+     * Attribute type map
+     */
+    public static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            name: "fileInfo",
+            baseName: "fileInfo",
+            type: "FileInfo",
+        },        
+        {
+            name: "annotations",
+            baseName: "annotations",
+            type: "Array<AnnotationInfo>",
+        },        
+        {
+            name: "firstPage",
+            baseName: "firstPage",
+            type: "number",
+        },        
+        {
+            name: "lastPage",
+            baseName: "lastPage",
+            type: "number",
+        },        
+        {
+            name: "onlyAnnotatedPages",
+            baseName: "onlyAnnotatedPages",
+            type: "boolean",
+        },        
+        {
+            name: "outputPath",
+            baseName: "outputPath",
+            type: "string",
+        }    ];
+
+    /**
+     * Returns attribute type map
+     */
+    public static getAttributeTypeMap() {
+        return AnnotateOptions.attributeTypeMap;
+    }
+
+    /**
+     * Input document description
+     */
+    public fileInfo: FileInfo;
+    
+    /**
+     * List of annotations to add to the document
+     */
+    public annotations: Array<AnnotationInfo>;
+    
+    /**
+     * First page number when saving page range
+     */
+    public firstPage: number;
+    
+    /**
+     * Last page number when saving page range
+     */
+    public lastPage: number;
+    
+    /**
+     * Indicates whether to save only annotated pages
+     */
+    public onlyAnnotatedPages: boolean;
+    
+    /**
+     * Path to output document in the cloud storage. Required for Add method. Not required if Annotate (with file result) method used.
+     */
+    public outputPath: string;
+    
+    public constructor(init?: Partial<AnnotateOptions>) {
+        
+        Object.assign(this, init);
+    }        
+}
 
 /**
  * Describes annotation properties
@@ -632,6 +715,69 @@ export class ErrorDetails {
 }
 
 /**
+ * File info
+ */
+export class FileInfo {
+
+    /**
+     * Attribute type map
+     */
+    public static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            name: "filePath",
+            baseName: "filePath",
+            type: "string",
+        },        
+        {
+            name: "storageName",
+            baseName: "storageName",
+            type: "string",
+        },        
+        {
+            name: "versionId",
+            baseName: "versionId",
+            type: "string",
+        },        
+        {
+            name: "password",
+            baseName: "password",
+            type: "string",
+        }    ];
+
+    /**
+     * Returns attribute type map
+     */
+    public static getAttributeTypeMap() {
+        return FileInfo.attributeTypeMap;
+    }
+
+    /**
+     * File path in storage
+     */
+    public filePath: string;
+    
+    /**
+     * Storage name
+     */
+    public storageName: string;
+    
+    /**
+     * Version ID
+     */
+    public versionId: string;
+    
+    /**
+     * Password to open file
+     */
+    public password: string;
+    
+    public constructor(init?: Partial<FileInfo>) {
+        
+        Object.assign(this, init);
+    }        
+}
+
+/**
  * File versions FileVersion.
  */
 export class FileVersions {
@@ -1158,6 +1304,99 @@ export class Point {
 }
 
 /**
+ * Represents options for GetPages API method
+ */
+export class PreviewOptions {
+
+    /**
+     * Attribute type map
+     */
+    public static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            name: "fileInfo",
+            baseName: "fileInfo",
+            type: "FileInfo",
+        },        
+        {
+            name: "format",
+            baseName: "format",
+            type: "PreviewOptions.FormatEnum",
+        },        
+        {
+            name: "pageNumbers",
+            baseName: "pageNumbers",
+            type: "Array<number>",
+        },        
+        {
+            name: "width",
+            baseName: "width",
+            type: "number",
+        },        
+        {
+            name: "height",
+            baseName: "height",
+            type: "number",
+        },        
+        {
+            name: "renderComments",
+            baseName: "renderComments",
+            type: "boolean",
+        }    ];
+
+    /**
+     * Returns attribute type map
+     */
+    public static getAttributeTypeMap() {
+        return PreviewOptions.attributeTypeMap;
+    }
+
+    /**
+     * Input document description
+     */
+    public fileInfo: FileInfo;
+    
+    /**
+     * Preview format. Supported values are: PNG, JPEG or BMP. Default value is PNG.
+     */
+    public format: PreviewOptions.FormatEnum;
+    
+    /**
+     * Page numbers to preview. All pages proceeded if not specified.
+     */
+    public pageNumbers: Array<number>;
+    
+    /**
+     * Preview image width. Not required. Default width used if not specified or 0.
+     */
+    public width: number;
+    
+    /**
+     * Preview image height. Not required. Default width used if not specified or 0.
+     */
+    public height: number;
+    
+    /**
+     * Render document comments. Default value is 'false'.
+     */
+    public renderComments: boolean;
+    
+    public constructor(init?: Partial<PreviewOptions>) {
+        
+        Object.assign(this, init);
+    }        
+}
+
+// tslint:disable:quotemark
+// tslint:disable-next-line:no-namespace
+export namespace PreviewOptions {
+    export enum FormatEnum {
+        PNG = 'PNG' as any,
+        JPEG = 'JPEG' as any,
+        BMP = 'BMP' as any,
+    }
+}
+// tslint:enable:quotemark
+/**
  * Describes rectangle where annotation will be placed
  */
 export class Rectangle {
@@ -1215,6 +1454,59 @@ export class Rectangle {
     public height: number;
     
     public constructor(init?: Partial<Rectangle>) {
+        
+        Object.assign(this, init);
+    }        
+}
+
+/**
+ * Options for removing annotations
+ */
+export class RemoveOptions {
+
+    /**
+     * Attribute type map
+     */
+    public static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            name: "fileInfo",
+            baseName: "fileInfo",
+            type: "FileInfo",
+        },        
+        {
+            name: "annotationIds",
+            baseName: "annotationIds",
+            type: "Array<number>",
+        },        
+        {
+            name: "outputPath",
+            baseName: "outputPath",
+            type: "string",
+        }    ];
+
+    /**
+     * Returns attribute type map
+     */
+    public static getAttributeTypeMap() {
+        return RemoveOptions.attributeTypeMap;
+    }
+
+    /**
+     * Input document description
+     */
+    public fileInfo: FileInfo;
+    
+    /**
+     * List of annotation IDs to remove from the document
+     */
+    public annotationIds: Array<number>;
+    
+    /**
+     * Path to output document in the cloud storage.
+     */
+    public outputPath: string;
+    
+    public constructor(init?: Partial<RemoveOptions>) {
         
         Object.assign(this, init);
     }        
@@ -1431,14 +1723,17 @@ const enumsMap = {
     "AnnotationInfo.VerticalAlignmentEnum": AnnotationInfo.VerticalAlignmentEnum,
     "AnnotationInfo.TypeEnum": AnnotationInfo.TypeEnum,
     "AnnotationInfo.PenStyleEnum": AnnotationInfo.PenStyleEnum,
+    "PreviewOptions.FormatEnum": PreviewOptions.FormatEnum,
 };
 
 const typeMap = {
+            AnnotateOptions,
             AnnotationInfo,
             AnnotationReplyInfo,
             DiscUsage,
             DocumentInfo,
             ErrorDetails,
+            FileInfo,
             FileVersions,
             FilesList,
             FilesUploadResult,
@@ -1451,7 +1746,9 @@ const typeMap = {
             PageImages,
             PageInfo,
             Point,
+            PreviewOptions,
             Rectangle,
+            RemoveOptions,
             StorageExist,
             StorageFile,
             AnnotationApiLink,
@@ -1462,94 +1759,58 @@ const typeMap = {
 export {enumsMap, typeMap};
 
 /**
- * Request model for DeleteAnnotations operation.
+ * Request model for Annotate operation.
  */
-export class DeleteAnnotationsRequest {
+export class AnnotateRequest {
     /**
-     * Document path in storage
+     * Annotation options
      */
-    public filePath: string;
+    public options: AnnotateOptions;
     
-    public constructor(filePath: string) {        
-        this.filePath = filePath;
+    public constructor(options: AnnotateOptions) {        
+        this.options = options;
     }
 }
 
 /**
- * Request model for GetExport operation.
+ * Request model for AnnotateDirect operation.
  */
-export class GetExportRequest {
+export class AnnotateDirectRequest {
     /**
-     * Document path in storage
+     * Annotation options
      */
-    public filePath: string;
-
-    /**
-     * Annotation types that will be exported. All annotation types will be exported if not specified
-     */
-    public annotationTypes: string;
-
-    /**
-     * Indicates whether to export only annotated pages
-     */
-    public annotatedPages: boolean;
-
-    /**
-     * Determines number of first exported page
-     */
-    public firstPage: number;
-
-    /**
-     * Determines number of last exported page
-     */
-    public lastPage: number;
-
-    /**
-     * Source document password
-     */
-    public password: string;
+    public options: AnnotateOptions;
     
-    public constructor(filePath: string, annotationTypes?: string, annotatedPages?: boolean, firstPage?: number, lastPage?: number, password?: string) {        
-        this.filePath = filePath;
-        this.annotationTypes = annotationTypes;
-        this.annotatedPages = annotatedPages;
-        this.firstPage = firstPage;
-        this.lastPage = lastPage;
-        this.password = password;
+    public constructor(options: AnnotateOptions) {        
+        this.options = options;
     }
 }
 
 /**
- * Request model for GetImport operation.
+ * Request model for Extract operation.
  */
-export class GetImportRequest {
+export class ExtractRequest {
     /**
-     * Document path in storage
+     * Input file information
      */
-    public filePath: string;
+    public fileInfo: FileInfo;
     
-    public constructor(filePath: string) {        
-        this.filePath = filePath;
+    public constructor(fileInfo: FileInfo) {        
+        this.fileInfo = fileInfo;
     }
 }
 
 /**
- * Request model for PostAnnotations operation.
+ * Request model for RemoveAnnotations operation.
  */
-export class PostAnnotationsRequest {
+export class RemoveAnnotationsRequest {
     /**
-     * Document path in storage
+     * Remove annotations options
      */
-    public filePath: string;
-
-    /**
-     * Array of annotation descriptions
-     */
-    public annotations: Array<AnnotationInfo>;
+    public options: RemoveOptions;
     
-    public constructor(filePath: string, annotations: Array<AnnotationInfo>) {        
-        this.filePath = filePath;
-        this.annotations = annotations;
+    public constructor(options: RemoveOptions) {        
+        this.options = options;
     }
 }
 
@@ -1842,18 +2103,12 @@ export class MoveFolderRequest {
  */
 export class GetInfoRequest {
     /**
-     * Document path in storage
+     * Document path in storage and password
      */
-    public filePath: string;
-
-    /**
-     * Source document password
-     */
-    public password: string;
+    public fileInfo: FileInfo;
     
-    public constructor(filePath: string, password?: string) {        
-        this.filePath = filePath;
-        this.password = password;
+    public constructor(fileInfo: FileInfo) {        
+        this.fileInfo = fileInfo;
     }
 }
 
@@ -1862,12 +2117,12 @@ export class GetInfoRequest {
  */
 export class DeletePagesRequest {
     /**
-     * Document path in storage
+     * Document info to remove preview
      */
-    public filePath: string;
+    public fileInfo: FileInfo;
     
-    public constructor(filePath: string) {        
-        this.filePath = filePath;
+    public constructor(fileInfo: FileInfo) {        
+        this.fileInfo = fileInfo;
     }
 }
 
@@ -1876,54 +2131,12 @@ export class DeletePagesRequest {
  */
 export class GetPagesRequest {
     /**
-     * Document path in storage
+     * Document preview options
      */
-    public filePath: string;
-
-    /**
-     * The list of page numbers to convert
-     */
-    public pageNumbersToConvert: Array<number>;
-
-    /**
-     * Preview format: \"PNG\" (default), \"JPEG\", or \"BMP\"
-     */
-    public format: string;
-
-    /**
-     * Preview image width
-     */
-    public width: number;
-
-    /**
-     * Preview image height
-     */
-    public height: number;
-
-    /**
-     * If true returns specific pages without annotations
-     */
-    public withoutAnnotations: boolean;
-
-    /**
-     * Render comments (false by default)
-     */
-    public renderComments: boolean;
-
-    /**
-     * Source document opening password
-     */
-    public password: string;
+    public options: PreviewOptions;
     
-    public constructor(filePath: string, pageNumbersToConvert?: Array<number>, format?: string, width?: number, height?: number, withoutAnnotations?: boolean, renderComments?: boolean, password?: string) {        
-        this.filePath = filePath;
-        this.pageNumbersToConvert = pageNumbersToConvert;
-        this.format = format;
-        this.width = width;
-        this.height = height;
-        this.withoutAnnotations = withoutAnnotations;
-        this.renderComments = renderComments;
-        this.password = password;
+    public constructor(options: PreviewOptions) {        
+        this.options = options;
     }
 }
 

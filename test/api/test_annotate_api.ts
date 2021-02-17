@@ -1,7 +1,7 @@
 /*
 * The MIT License (MIT)
 *
-* Copyright (c) 2003-2020 Aspose Pty Ltd
+* Copyright (c) 2003-2021 Aspose Pty Ltd
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ import "mocha";
 import * as TestContext from "../test_context";
 import { TestFile } from "../test_file";
 import * as Model from "../../src/model";
-import { PostAnnotationsRequest, GetImportRequest, GetExportRequest, DeleteAnnotationsRequest } from "../../src/annotation_api";
+import { ExtractRequest, AnnotateRequest, RemoveAnnotationsRequest } from "../../src/annotation_api";
 
 describe("annotate_api", () => {
     
@@ -45,22 +45,55 @@ describe("annotate_api", () => {
         const testFiles = TestFile.GetTestFilesAnnotate();
         for(let i=0; i<testFiles.length; i++) {
             let file = testFiles[i];
+            let fileInfo = new Model.FileInfo();
+            fileInfo.filePath = file.GetPath();
+            fileInfo.password = file.password;
+            let options = new Model.AnnotateOptions();
+            options.fileInfo = fileInfo;
+            options.annotations = get_annotations();
+            options.outputPath = TestContext.getOutputPath(file.fileName);
 
-            // Post annotation
-            await annotateApi.postAnnotations(new PostAnnotationsRequest(file.GetPath(), get_annotations()));
-            
-            // Import annotations
-            const responseImport = await annotateApi.getImport(new GetImportRequest(file.GetPath()));
-            expect(responseImport.length).greaterThan(0);
-
-            // Export annotations
-            const responseExport = await annotateApi.getExport(new GetExportRequest(file.GetPath(), undefined, undefined, undefined, undefined, file.password));
-            expect(responseExport.length).greaterThan(0);
-
-            // Delete annotations
-            await annotateApi.deleteAnnotations(new DeleteAnnotationsRequest(file.GetPath()));
+            // Add annotation
+            let result = await annotateApi.annotate(new AnnotateRequest(options));
+            expect(result).instanceof(Model.AnnotationApiLink);
+            expect(result.href.length).greaterThan(0);
         }
     });
+
+    it("test_extract", async () => {            
+        const annotateApi = TestContext.getAnnotateApi();
+        const testFiles = TestFile.GetTestFilesWithAnnotations();
+        for(let i=0; i<testFiles.length; i++) {
+            let file = testFiles[i];
+            let fileInfo = new Model.FileInfo();
+            fileInfo.filePath = file.GetPath();
+            fileInfo.password = file.password;
+
+            // Get annotations
+            let result = await annotateApi.extract(new ExtractRequest(fileInfo));            
+            expect(result.length).greaterThan(0);
+        }
+    });    
+
+    it("test_remove", async () => {            
+        const annotateApi = TestContext.getAnnotateApi();
+        const testFiles = TestFile.GetTestFilesWithAnnotations();
+        for(let i=0; i<testFiles.length; i++) {
+            let file = testFiles[i];
+            let fileInfo = new Model.FileInfo();
+            fileInfo.filePath = file.GetPath();
+            fileInfo.password = file.password;
+            let options = new Model.RemoveOptions();
+            options.fileInfo = fileInfo;
+            options.annotationIds = [1, 2, 3];
+            options.outputPath = TestContext.getOutputPath(file.fileName);
+            get_annotations();
+            // Remove annotations
+            let result = await annotateApi.removeAnnotations(new RemoveAnnotationsRequest(options));
+            expect(result).instanceof(Model.AnnotationApiLink);
+            expect(result.href.length).greaterThan(0);
+        }
+    });    
 
     function get_annotations() {
         let a = new Model.AnnotationInfo();

@@ -1,7 +1,7 @@
 /*
 * The MIT License (MIT)
 *
-* Copyright (c) 2003-2020 Aspose Pty Ltd
+* Copyright (c) 2003-2021 Aspose Pty Ltd
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,9 @@ let annotateApi: AnnotateApi;
 let storageApi: StorageApi;
 let fileApi: FileApi;
 let folderApi: FolderApi;
+
 var uploaded: boolean = false;
+var outputDir: string = "Output";
 
 
 /**
@@ -115,7 +117,7 @@ export async function uploadTestFiles() {
 export function cleanupTempFiles() {
     const api = getFolderApi();
     
-    const tempDirs = [];    
+    const tempDirs = [outputDir];    
 
     return Promise.all(tempDirs.map((dir) => {
         return deleteTempDir(api, dir);
@@ -140,6 +142,10 @@ export function serializeIntoBuffer(obj) {
     return new Buffer(json, "utf-8");
 }
 
-const deleteTempDir = (api, dir) => {
+const deleteTempDir = (api: FolderApi, dir: string) => {
     return api.deleteFolder(new DeleteFolderRequest(dir, undefined, true));
 };
+
+export function getOutputPath(filename: string) {    
+    return outputDir + "/" + filename;
+}

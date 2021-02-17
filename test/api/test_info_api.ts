@@ -1,7 +1,7 @@
 /*
 * The MIT License (MIT)
 *
-* Copyright (c) 2003-2020 Aspose Pty Ltd
+* Copyright (c) 2003-2021 Aspose Pty Ltd
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@ import { expect } from "chai";
 import "mocha";
 import * as TestContext from "../test_context";
 import { TestFile } from "../test_file";
+import * as Model from "../../src/model";
 import { GetInfoRequest } from "../../src/annotation_api";
 
 describe("info_api", () => {
@@ -53,10 +54,14 @@ describe("info_api", () => {
         
     it("test_get_info", async () => {            
         const infoApi = TestContext.getInfoApi();
-        const testFiles = TestFile.GetTestFilesPreview();
+        const testFiles = TestFile.GetTestFilesAnnotate();
         for(let i=0; i<testFiles.length; i++) {
             let file = testFiles[i];
-            const response = await infoApi.getInfo(new GetInfoRequest(file.GetPath(), file.password));
+            let fileInfo = new Model.FileInfo();
+            fileInfo.filePath = file.GetPath();
+            fileInfo.password = file.password;
+
+            const response = await infoApi.getInfo(new GetInfoRequest(fileInfo));
             expect(response.path).equal(file.GetPath());            
         }
     });

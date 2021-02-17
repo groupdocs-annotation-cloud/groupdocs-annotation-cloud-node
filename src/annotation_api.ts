@@ -1,7 +1,7 @@
 /*
 * The MIT License (MIT)
 *
-* Copyright (c) 2003-2020 Aspose Pty Ltd
+* Copyright (c) 2003-2021 Aspose Pty Ltd
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -69,62 +69,58 @@ export class AnnotateApi {
     }
 
     /**
-     * Removes annotations from document
+     * Adds annotations to document and saves output file into cloud storage
      * @param requestObj contains request parameters
      */
-    public async deleteAnnotations(requestObj: model.DeleteAnnotationsRequest): Promise<http.IncomingMessage> {
+    public async annotate(requestObj: model.AnnotateRequest): Promise<model.AnnotationApiLink> {
         if (requestObj === null || requestObj === undefined) {
-            throw new Error('Required parameter "requestObj" was null or undefined when calling deleteAnnotations.');
+            throw new Error('Required parameter "requestObj" was null or undefined when calling annotate.');
         }
 
-        let localVarPath = this.configuration.getServerUrl() + "/annotation";
+        const localVarPath = this.configuration.getServerUrl() + "/annotation/add";
         const queryParameters: any = {};
 
-        // verify required parameter 'requestObj.filePath' is not null or undefined
-        if (requestObj.filePath === null || requestObj.filePath === undefined) {
-            throw new Error('Required parameter "requestObj.filePath" was null or undefined when calling deleteAnnotations.');
+        // verify required parameter 'requestObj.options' is not null or undefined
+        if (requestObj.options === null || requestObj.options === undefined) {
+            throw new Error('Required parameter "requestObj.options" was null or undefined when calling annotate.');
         }
         
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "filePath", requestObj.filePath);
         const requestOptions: request.Options = {
-            method: "DELETE",
+            method: "POST",
             qs: queryParameters,
             uri: localVarPath,
             json: true,
+            body: Serializer.serialize(requestObj.options, requestObj.options.constructor.name === "Object" ? "AnnotateOptions" : requestObj.options.constructor.name),
         };
 
         const response = await invokeApiMethod(requestOptions, this.configuration);
-        return Promise.resolve(response);
+        const result =  Serializer.deserialize(response.body, "AnnotationApiLink");
+        return Promise.resolve(result);
     }
 
     /**
-     * Retrieves document with annotations
+     * Adds annotations to document and returns output file
      * @param requestObj contains request parameters
      */
-    public async getExport(requestObj: model.GetExportRequest): Promise<Buffer> {
+    public async annotateDirect(requestObj: model.AnnotateDirectRequest): Promise<Buffer> {
         if (requestObj === null || requestObj === undefined) {
-            throw new Error('Required parameter "requestObj" was null or undefined when calling getExport.');
+            throw new Error('Required parameter "requestObj" was null or undefined when calling annotateDirect.');
         }
 
-        let localVarPath = this.configuration.getServerUrl() + "/annotation/result";
+        const localVarPath = this.configuration.getServerUrl() + "/annotation/add";
         const queryParameters: any = {};
 
-        // verify required parameter 'requestObj.filePath' is not null or undefined
-        if (requestObj.filePath === null || requestObj.filePath === undefined) {
-            throw new Error('Required parameter "requestObj.filePath" was null or undefined when calling getExport.');
+        // verify required parameter 'requestObj.options' is not null or undefined
+        if (requestObj.options === null || requestObj.options === undefined) {
+            throw new Error('Required parameter "requestObj.options" was null or undefined when calling annotateDirect.');
         }
         
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "filePath", requestObj.filePath);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "annotationTypes", requestObj.annotationTypes);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "annotatedPages", requestObj.annotatedPages);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "firstPage", requestObj.firstPage);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "lastPage", requestObj.lastPage);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "password", requestObj.password);
         const requestOptions: request.Options = {
-            method: "GET",
+            method: "PUT",
             qs: queryParameters,
             uri: localVarPath,
             encoding: null,
+            body: Serializer.serialize(requestObj.options, requestObj.options.constructor.name === "Object" ? "AnnotateOptions" : requestObj.options.constructor.name),
         };
 
         const response = await invokeApiMethod(requestOptions, this.configuration);
@@ -136,25 +132,25 @@ export class AnnotateApi {
      * Extracts annotations from document
      * @param requestObj contains request parameters
      */
-    public async getImport(requestObj: model.GetImportRequest): Promise<Array<model.AnnotationInfo>> {
+    public async extract(requestObj: model.ExtractRequest): Promise<Array<model.AnnotationInfo>> {
         if (requestObj === null || requestObj === undefined) {
-            throw new Error('Required parameter "requestObj" was null or undefined when calling getImport.');
+            throw new Error('Required parameter "requestObj" was null or undefined when calling extract.');
         }
 
-        let localVarPath = this.configuration.getServerUrl() + "/annotation";
+        const localVarPath = this.configuration.getServerUrl() + "/annotation/extract";
         const queryParameters: any = {};
 
-        // verify required parameter 'requestObj.filePath' is not null or undefined
-        if (requestObj.filePath === null || requestObj.filePath === undefined) {
-            throw new Error('Required parameter "requestObj.filePath" was null or undefined when calling getImport.');
+        // verify required parameter 'requestObj.fileInfo' is not null or undefined
+        if (requestObj.fileInfo === null || requestObj.fileInfo === undefined) {
+            throw new Error('Required parameter "requestObj.fileInfo" was null or undefined when calling extract.');
         }
         
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "filePath", requestObj.filePath);
         const requestOptions: request.Options = {
-            method: "GET",
+            method: "POST",
             qs: queryParameters,
             uri: localVarPath,
             json: true,
+            body: Serializer.serialize(requestObj.fileInfo, requestObj.fileInfo.constructor.name === "Object" ? "FileInfo" : requestObj.fileInfo.constructor.name),
         };
 
         const response = await invokeApiMethod(requestOptions, this.configuration);
@@ -163,38 +159,33 @@ export class AnnotateApi {
     }
 
     /**
-     * Adds annotations to document
+     * Removes annotations from document
      * @param requestObj contains request parameters
      */
-    public async postAnnotations(requestObj: model.PostAnnotationsRequest): Promise<http.IncomingMessage> {
+    public async removeAnnotations(requestObj: model.RemoveAnnotationsRequest): Promise<model.AnnotationApiLink> {
         if (requestObj === null || requestObj === undefined) {
-            throw new Error('Required parameter "requestObj" was null or undefined when calling postAnnotations.');
+            throw new Error('Required parameter "requestObj" was null or undefined when calling removeAnnotations.');
         }
 
-        let localVarPath = this.configuration.getServerUrl() + "/annotation";
+        const localVarPath = this.configuration.getServerUrl() + "/annotation/remove";
         const queryParameters: any = {};
 
-        // verify required parameter 'requestObj.filePath' is not null or undefined
-        if (requestObj.filePath === null || requestObj.filePath === undefined) {
-            throw new Error('Required parameter "requestObj.filePath" was null or undefined when calling postAnnotations.');
-        }
-
-        // verify required parameter 'requestObj.annotations' is not null or undefined
-        if (requestObj.annotations === null || requestObj.annotations === undefined) {
-            throw new Error('Required parameter "requestObj.annotations" was null or undefined when calling postAnnotations.');
+        // verify required parameter 'requestObj.options' is not null or undefined
+        if (requestObj.options === null || requestObj.options === undefined) {
+            throw new Error('Required parameter "requestObj.options" was null or undefined when calling removeAnnotations.');
         }
         
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "filePath", requestObj.filePath);
         const requestOptions: request.Options = {
             method: "POST",
             qs: queryParameters,
             uri: localVarPath,
             json: true,
-            body: Serializer.serialize(requestObj.annotations, requestObj.annotations.constructor.name === "Object" ? "Array<AnnotationInfo>" : requestObj.annotations.constructor.name),
+            body: Serializer.serialize(requestObj.options, requestObj.options.constructor.name === "Object" ? "RemoveOptions" : requestObj.options.constructor.name),
         };
 
         const response = await invokeApiMethod(requestOptions, this.configuration);
-        return Promise.resolve(response);
+        const result =  Serializer.deserialize(response.body, "AnnotationApiLink");
+        return Promise.resolve(result);
     }
 
 }
@@ -666,21 +657,20 @@ export class InfoApi {
             throw new Error('Required parameter "requestObj" was null or undefined when calling getInfo.');
         }
 
-        let localVarPath = this.configuration.getServerUrl() + "/annotation/info";
+        const localVarPath = this.configuration.getServerUrl() + "/annotation/info";
         const queryParameters: any = {};
 
-        // verify required parameter 'requestObj.filePath' is not null or undefined
-        if (requestObj.filePath === null || requestObj.filePath === undefined) {
-            throw new Error('Required parameter "requestObj.filePath" was null or undefined when calling getInfo.');
+        // verify required parameter 'requestObj.fileInfo' is not null or undefined
+        if (requestObj.fileInfo === null || requestObj.fileInfo === undefined) {
+            throw new Error('Required parameter "requestObj.fileInfo" was null or undefined when calling getInfo.');
         }
         
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "filePath", requestObj.filePath);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "password", requestObj.password);
         const requestOptions: request.Options = {
-            method: "GET",
+            method: "POST",
             qs: queryParameters,
             uri: localVarPath,
             json: true,
+            body: Serializer.serialize(requestObj.fileInfo, requestObj.fileInfo.constructor.name === "Object" ? "FileInfo" : requestObj.fileInfo.constructor.name),
         };
 
         const response = await invokeApiMethod(requestOptions, this.configuration);
@@ -754,20 +744,20 @@ export class PreviewApi {
             throw new Error('Required parameter "requestObj" was null or undefined when calling deletePages.');
         }
 
-        let localVarPath = this.configuration.getServerUrl() + "/annotation/pages";
+        const localVarPath = this.configuration.getServerUrl() + "/annotation/preview/remove";
         const queryParameters: any = {};
 
-        // verify required parameter 'requestObj.filePath' is not null or undefined
-        if (requestObj.filePath === null || requestObj.filePath === undefined) {
-            throw new Error('Required parameter "requestObj.filePath" was null or undefined when calling deletePages.');
+        // verify required parameter 'requestObj.fileInfo' is not null or undefined
+        if (requestObj.fileInfo === null || requestObj.fileInfo === undefined) {
+            throw new Error('Required parameter "requestObj.fileInfo" was null or undefined when calling deletePages.');
         }
         
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "filePath", requestObj.filePath);
         const requestOptions: request.Options = {
-            method: "DELETE",
+            method: "POST",
             qs: queryParameters,
             uri: localVarPath,
             json: true,
+            body: Serializer.serialize(requestObj.fileInfo, requestObj.fileInfo.constructor.name === "Object" ? "FileInfo" : requestObj.fileInfo.constructor.name),
         };
 
         const response = await invokeApiMethod(requestOptions, this.configuration);
@@ -783,27 +773,20 @@ export class PreviewApi {
             throw new Error('Required parameter "requestObj" was null or undefined when calling getPages.');
         }
 
-        let localVarPath = this.configuration.getServerUrl() + "/annotation/pages";
+        const localVarPath = this.configuration.getServerUrl() + "/annotation/preview/create";
         const queryParameters: any = {};
 
-        // verify required parameter 'requestObj.filePath' is not null or undefined
-        if (requestObj.filePath === null || requestObj.filePath === undefined) {
-            throw new Error('Required parameter "requestObj.filePath" was null or undefined when calling getPages.');
+        // verify required parameter 'requestObj.options' is not null or undefined
+        if (requestObj.options === null || requestObj.options === undefined) {
+            throw new Error('Required parameter "requestObj.options" was null or undefined when calling getPages.');
         }
         
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "filePath", requestObj.filePath);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "pageNumbersToConvert", requestObj.pageNumbersToConvert);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "format", requestObj.format);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "width", requestObj.width);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "height", requestObj.height);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "withoutAnnotations", requestObj.withoutAnnotations);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "renderComments", requestObj.renderComments);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "password", requestObj.password);
         const requestOptions: request.Options = {
-            method: "GET",
+            method: "POST",
             qs: queryParameters,
             uri: localVarPath,
             json: true,
+            body: Serializer.serialize(requestObj.options, requestObj.options.constructor.name === "Object" ? "PreviewOptions" : requestObj.options.constructor.name),
         };
 
         const response = await invokeApiMethod(requestOptions, this.configuration);
