@@ -31,9 +31,9 @@
     "build:package": "npm pack"
   },
   "dependencies": {
+    "@types/request": "*",
     "request": "^2.88.0",
-    "request-debug": "^0.2.0",
-    "@types/request": "*"
+    "request-debug": "^0.2.0"
   },
   "devDependencies": {
     "@types/chai": "^4.2.14",
