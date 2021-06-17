@@ -65,4 +65,13 @@ describe("info_api", () => {
             expect(response.path).equal(file.GetPath());            
         }
     });
+
+    it("test_get_info_file_not_found", () => {  
+        let fileInfo = new Model.FileInfo();
+        fileInfo.filePath = "some-folder\\NotExist.docx";
+        const request = new GetInfoRequest(fileInfo);
+        return TestContext.getInfoApi().getInfo(request).catch((error) => {
+            expect(error.message).equal("Specified file not found");
+        });
+    });            
 });

@@ -60,6 +60,11 @@ export class AnnotateOptions {
             name: "outputPath",
             baseName: "outputPath",
             type: "string",
+        },        
+        {
+            name: "fontsPath",
+            baseName: "fontsPath",
+            type: "string",
         }    ];
 
     /**
@@ -98,6 +103,11 @@ export class AnnotateOptions {
      * Path to output document in the cloud storage. Required for Add method. Not required if Annotate (with file result) method used.
      */
     public outputPath: string;
+    
+    /**
+     * The path to directory containing custom fonts in storage
+     */
+    public fontsPath: string;
     
     public constructor(init?: Partial<AnnotateOptions>) {
         
@@ -237,6 +247,11 @@ export class AnnotationInfo {
         {
             name: "angle",
             baseName: "angle",
+            type: "number",
+        },        
+        {
+            name: "zIndex",
+            baseName: "zIndex",
             type: "number",
         },        
         {
@@ -381,6 +396,11 @@ export class AnnotationInfo {
      * Gets or sets the watermark annotation's rotation angle
      */
     public angle: number;
+    
+    /**
+     * Gets or sets z-index. Default value is 0 The z-index property specifies the stack order of an element.
+     */
+    public zIndex: number;
     
     /**
      * Gets or sets annotation link url
@@ -1338,9 +1358,24 @@ export class PreviewOptions {
             type: "number",
         },        
         {
+            name: "resolution",
+            baseName: "resolution",
+            type: "number",
+        },        
+        {
             name: "renderComments",
             baseName: "renderComments",
             type: "boolean",
+        },        
+        {
+            name: "renderAnnotations",
+            baseName: "renderAnnotations",
+            type: "boolean",
+        },        
+        {
+            name: "fontsPath",
+            baseName: "fontsPath",
+            type: "string",
         }    ];
 
     /**
@@ -1376,9 +1411,24 @@ export class PreviewOptions {
     public height: number;
     
     /**
+     * Gets or sets the resolution for generated images, in dots per inch. The default value is 96.
+     */
+    public resolution: number;
+    
+    /**
      * Render document comments. Default value is 'false'.
      */
     public renderComments: boolean;
+    
+    /**
+     * The property that controls whether annotations will be generated on the preview. Default State - true.
+     */
+    public renderAnnotations: boolean;
+    
+    /**
+     * The path to directory containing custom fonts in storage
+     */
+    public fontsPath: string;
     
     public constructor(init?: Partial<PreviewOptions>) {
         
