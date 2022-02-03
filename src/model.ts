@@ -230,6 +230,11 @@ export class AnnotationInfo {
             type: "number",
         },        
         {
+            name: "squigglyColor",
+            baseName: "squigglyColor",
+            type: "number",
+        },        
+        {
             name: "fontFamily",
             baseName: "fontFamily",
             type: "string",
@@ -263,6 +268,11 @@ export class AnnotationInfo {
             name: "imagePath",
             baseName: "imagePath",
             type: "string",
+        },        
+        {
+            name: "autoScale",
+            baseName: "autoScale",
+            type: "boolean",
         }    ];
 
     /**
@@ -378,6 +388,11 @@ export class AnnotationInfo {
     public backgroundColor: number;
     
     /**
+     * Gets or sets annotation color
+     */
+    public squigglyColor: number;
+    
+    /**
      * Gets or sets the annotation's font family
      */
     public fontFamily: string;
@@ -411,6 +426,11 @@ export class AnnotationInfo {
      * Gets or sets image file path in cloud storage, for Image annotations
      */
     public imagePath: string;
+    
+    /**
+     * Sets auto scale for watermark annotation
+     */
+    public autoScale: boolean;
     
     public constructor(init?: Partial<AnnotationInfo>) {
         
@@ -451,6 +471,7 @@ export namespace AnnotationInfo {
         TextUnderline = 'TextUnderline' as any,
         Watermark = 'Watermark' as any,
         Image = 'Image' as any,
+        TextSquiggly = 'TextSquiggly' as any,
     }
     export enum PenStyleEnum {
         Solid = 'Solid' as any,
@@ -550,6 +571,49 @@ export class AnnotationReplyInfo {
     public parentReplyId: number;
     
     public constructor(init?: Partial<AnnotationReplyInfo>) {
+        
+        Object.assign(this, init);
+    }        
+}
+
+/**
+ * Metered license consumption information
+ */
+export class ConsumptionResult {
+
+    /**
+     * Attribute type map
+     */
+    public static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            name: "credit",
+            baseName: "credit",
+            type: "number",
+        },        
+        {
+            name: "quantity",
+            baseName: "quantity",
+            type: "number",
+        }    ];
+
+    /**
+     * Returns attribute type map
+     */
+    public static getAttributeTypeMap() {
+        return ConsumptionResult.attributeTypeMap;
+    }
+
+    /**
+     * Amount of used credits
+     */
+    public credit: number;
+    
+    /**
+     * Amount of MBs processed
+     */
+    public quantity: number;
+    
+    public constructor(init?: Partial<ConsumptionResult>) {
         
         Object.assign(this, init);
     }        
@@ -1780,6 +1844,7 @@ const typeMap = {
             AnnotateOptions,
             AnnotationInfo,
             AnnotationReplyInfo,
+            ConsumptionResult,
             DiscUsage,
             DocumentInfo,
             ErrorDetails,

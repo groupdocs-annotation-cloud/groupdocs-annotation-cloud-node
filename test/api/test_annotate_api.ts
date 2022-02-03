@@ -32,7 +32,6 @@ import { ExtractRequest, AnnotateRequest, RemoveAnnotationsRequest } from "../..
 describe("annotate_api", () => {
     
     before(async () => {
-        process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = "0"
         await TestContext.uploadTestFiles();
     });
 

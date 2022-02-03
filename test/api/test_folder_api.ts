@@ -36,7 +36,6 @@ import * as TestContext from "../test_context";
 describe("folder_api", () => {
     
     before(async () => {
-        process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = "0"
         await TestContext.uploadTestFiles();
     });
 

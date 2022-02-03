@@ -38,7 +38,6 @@ import { TestFile } from "../test_file";
 describe("file_api", () => {
     
     before(async () => {
-        process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = "0"
         await TestContext.uploadTestFiles();
     });
 

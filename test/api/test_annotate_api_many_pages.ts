@@ -32,7 +32,7 @@ import { AnnotateRequest } from "../../src/annotation_api";
 describe("annotate_api_many_pages", () => {
     
     before(async () => {
-        process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = "0"
+        //process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = "0"
         await TestContext.uploadTestFiles();
     });
 
